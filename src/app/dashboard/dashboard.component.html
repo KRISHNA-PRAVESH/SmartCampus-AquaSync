@@ -107,26 +107,50 @@
       </div>
       <div class="page-inner mt--5">
         <div class="row">
-          <div class="col-md-8">
-            <div class="card" style="margin-bottom: 100px;" >
+          <div class="col-md-12">
+            <div class="card">
               <div class="card-header">
                 <div class="card-head-row">
-                  <div class="card-title">Sensor Readings &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Emp_id: 1, Location: Coimbatore</div>
+                  <div class="card-title">Bore Well</div>
                   
                 </div>
               </div>
-              <div class="card-body" >
-                <div class="chart-container" style="min-height: 375px;">
-                  <app-graph></app-graph>
-                </div>
-                <div id="myChartLegend"></div>
+              <div class="card">
+                <app-borewell-status></app-borewell-status>
               </div>
             </div>
           </div>
-          
-          <div class="col-md-4">
+
+          <div class="col-md-12">
             <div class="card">
+              <div class="card-header">
+                <div class="card-head-row">
+                  <div class="card-title">Sump Tank</div>
+                  
+                </div>
+              </div>
+              <div class="card">
+                <app-sump-tank-status></app-sump-tank-status>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overhead tank -->
+          <div class="col-md-6">
+            <div class="card center">
+              <app-piechart-overhead></app-piechart-overhead>
+              
+            </div>
+          </div>
+
+
+          <!-- Sump tank -->
+          <div class="col-md-6">
+            <div class="card center">
               <app-piechart></app-piechart>
+              <div class="tank-title">
+               
+              </div>
             </div>
           </div>
 

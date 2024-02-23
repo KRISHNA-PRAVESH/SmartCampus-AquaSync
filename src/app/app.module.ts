@@ -38,6 +38,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
 import { PiechartComponent } from './piechart/piechart.component';
 import { LocationComponent } from './location/location.component';
 import { LiveTableComponent } from './live-table/live-table.component';
+import { PiechartOverheadComponent } from './piechart-overhead/piechart-overhead.component';
+import { BorewellStatusComponent } from './borewell-status/borewell-status.component';
+import { SumpTankStatusComponent } from './sump-tank-status/sump-tank-status.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { LiveTableComponent } from './live-table/live-table.component';
     SmsComponent,
     PiechartComponent,
     LocationComponent,
-    LiveTableComponent
+    LiveTableComponent,
+    PiechartOverheadComponent,
+    BorewellStatusComponent,
+    SumpTankStatusComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

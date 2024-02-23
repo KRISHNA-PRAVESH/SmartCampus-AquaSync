@@ -73,15 +73,15 @@ export class FirebaseService {
               lat: data[10],
               lon: data[11]
           };
-          if(structured_json.sos == 'yes') console.log("SOS occured for id: "+structured_json.id);
-          console.log(this.latest_id)
+          // if(structured_json.sos == 'yes') console.log("SOS occured for id: "+structured_json.id);
+          // console.log(this.latest_id)
           //If for any data 'sos' becomes 'yes', send an immediate alert sms to the supervisor through message service
           if(structured_json.sos == 'yes' &&  structured_json.id > this.latest_id){ 
             //check for redundant emergency messages: -> previous sos
             this.latest_id = structured_json.id;
             //invoke sendSMS() function at message service
-            console.log("SOS sent for id: ",structured_json.id)
-            this.messageService.sendSMS("An Emergency Occured !");
+            // console.log("SOS sent for id: ",structured_json.id)
+            // this.messageService.sendSMS("An Emergency Occured !");
             //remove comment to intialise service
           }
           clean_data.push(structured_json);

@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
     3. Contact the nearest medical facility for assistance.
     4. Evacuate the area if necessary to protect other workers. 
     `
-    this.messageService.sendSMS(emergencyMessage)
+    // this.messageService.sendSMS(emergencyMessage)
   }
 
   logout(){

@@ -1,16 +1,16 @@
+
 import { Component, OnInit} from '@angular/core';
 import { Chart } from 'chart.js';
 import { FirebaseService } from '../services/firebase.service';
-
 @Component({
-  selector: 'app-piechart',
-  templateUrl: './piechart.component.html',
-  styleUrls: ['./piechart.component.css']
+  selector: 'app-piechart-overhead',
+  templateUrl: './piechart-overhead.component.html',
+  styleUrls: ['./piechart-overhead.component.css']
 })
-export class PiechartComponent implements OnInit {
+export class PiechartOverheadComponent {
   public pie_chart:any;
 
-  public water_level:any = 60;
+  public water_level:any = 50;
   
   constructor(private firebaseService:FirebaseService) {}
   
@@ -46,7 +46,7 @@ export class PiechartComponent implements OnInit {
   }
   displayPieChart(data:any[]){
     //  console.log(this.firebaseService.getUpdatedReadings())
-   this.pie_chart = new Chart("pie_chart",{
+   this.pie_chart = new Chart("pie_chart_2",{
     type:'pie',
     data:{
       labels:['Water Level'],
@@ -56,11 +56,10 @@ export class PiechartComponent implements OnInit {
         '#96EFFF',
         'grey'
       ],
-     
+      hoverOffset: 4
     }]
    }
    })
 
   }
-
 }
