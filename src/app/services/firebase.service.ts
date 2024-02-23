@@ -44,7 +44,7 @@ export class FirebaseService {
   }
   private async fetchData(){
   
-    const ref = this.db.list('/worker');
+    const ref = this.db.list('/watermanagement');
     console.log(ref.valueChanges());
     return ref.valueChanges();
   }
@@ -60,35 +60,26 @@ export class FirebaseService {
           const data = reading.data.split('#');
          
           const structured_json = {
-              id: data[0],
-              h2s: data[1],
-              nh3: data[2],
-              co: data[3],
-              ch4:data[4],
-              temperature:data[5],
-              humidity:data[6],
-              heartbeat:data[7],
-              emp_id: data[8],
-              sos: data[9],
-              lat: data[10],
-              lon: data[11]
+              count: data[0],
+              oh_water_level: data[1],
+              sump_motor_status: data[2],
+              sump_water_level: data[3],
+              sump_motor_power:data[4],
+              sump_motor_current:data[5],
+              sump_motor_voltage:data[6],
+              sump_motor_pf:data[7],
+              borewell_motor_status: data[8],
+              borewell_motor_power: data[9],
+              borewell_motor_current: data[10],
+              borewell_motor_voltage: data[11],
+              borewell_motor_pf: data[12]
           };
-          // if(structured_json.sos == 'yes') console.log("SOS occured for id: "+structured_json.id);
-          // console.log(this.latest_id)
-          //If for any data 'sos' becomes 'yes', send an immediate alert sms to the supervisor through message service
-          if(structured_json.sos == 'yes' &&  structured_json.id > this.latest_id){ 
-            //check for redundant emergency messages: -> previous sos
-            this.latest_id = structured_json.id;
-            //invoke sendSMS() function at message service
-            // console.log("SOS sent for id: ",structured_json.id)
-            // this.messageService.sendSMS("An Emergency Occured !");
-            //remove comment to intialise service
-          }
+          
           clean_data.push(structured_json);
         })
         this.readings = clean_data
         
-        console.log(this.readings);
+        // console.log(this.readings);
         resolve(data);
       });
     });

@@ -13,13 +13,15 @@
 // };
 export const environment = {
   firebaseConfig: {
-    apiKey: "AIzaSyAGWMA7zyJPZwTAdcttGTM5HDN-d0vuJlM",
-    authDomain: "sih-project-799e6.firebaseapp.com",
-    projectId: "sih-project-799e6",
-    storageBucket: "sih-project-799e6.appspot.com",
-    messagingSenderId: "445233707490",
-    appId: "1:445233707490:web:53bfc25b6b25adab08e1bb",
-    measurementId: "G-4E9Q5MK257"
+    apiKey: "AIzaSyCgGDRoLiTpv9jzZCrzgJETUM0uIME-L2o",
+    authDomain: "smartcampus-aquasync.firebaseapp.com",
+    databaseURL: "https://smartcampus-aquasync-default-rtdb.firebaseio.com",
+    projectId: "smartcampus-aquasync",
+    storageBucket: "smartcampus-aquasync.appspot.com",  
+    messagingSenderId: "435313151459",
+    appId: "1:435313151459:web:de11128a47baad16ca64d6",
+    measurementId: "G-4V5HGN6R17"
+  
   },
   twilio:{
     s_id:"ACfc8a97db4fdc61bfa925c28baec3be91",

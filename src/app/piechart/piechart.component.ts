@@ -10,7 +10,7 @@ import { FirebaseService } from '../services/firebase.service';
 export class PiechartComponent implements OnInit {
   public pie_chart:any;
 
-  public water_level:any = 60;
+  public water_level:number = 0;
   
   constructor(private firebaseService:FirebaseService) {}
   
@@ -20,38 +20,34 @@ export class PiechartComponent implements OnInit {
   //use setTime out for some time until graph component fetches all data
    
       this.readings =  await this.firebaseService.readData();
-      console.log(this.readings);
+      // console.log(this.readings);
       this.fetchable = true;
       let len = this.readings.length-1;
-      let pie_data = [this.readings[len].co,this.readings[len].h2s,this.readings[len].nh3,this.readings[len].ch4]
-      this.displayPieChart(pie_data);
+      this.water_level = this.readings[len].sump_water_level;
+      this.displayPieChart(this.water_level);
   
   
 
   
    setInterval(()=>{
     this.readings = this.firebaseService.getUpdatedReadings();
-     let co_readings = this.readings.map(item => item.co);
-      let h2s_readings = this.readings.map(item => item.h2s);
-      let nh3_readings = this.readings.map(item => item.nh3);
-      let ch4_readings = this.readings.map(item => item.ch4);
-      
-      
-      const len = co_readings.length-1;
-      let pie_data = [co_readings[len],h2s_readings[len],nh3_readings[len],ch4_readings[len]]
-      // this.pie_chart.data.datasets[0].data = pie_data;
+    let len = this.readings.length-1;
+    let current_water_level = parseInt(this.readings[len].sump_water_level);
+    this.water_level = this.readings[len].sump_water_level;
+    this.pie_chart.data.datasets[0].data = [current_water_level,100-current_water_level];
+
       this.pie_chart.update();
    },3000)
 
   }
-  displayPieChart(data:any[]){
+  displayPieChart(data:number){
     //  console.log(this.firebaseService.getUpdatedReadings())
    this.pie_chart = new Chart("pie_chart",{
     type:'pie',
     data:{
       labels:['Water Level'],
     datasets: [{
-      data: [this.water_level,100-this.water_level],
+      data: [data,100-data],
       backgroundColor: [
         '#96EFFF',
         'grey'
