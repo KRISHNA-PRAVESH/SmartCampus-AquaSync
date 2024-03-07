@@ -15,54 +15,73 @@ export class DashboardComponent implements OnInit {
   humidity = 0;
   temperature = 0;
   public readings:any[] = [];
+
+  ThresholdData = {
+    OverHeadMin:'',
+    OverHeadMax:'',
+    SumpTankMin:'',
+    SumpTankMax:''
+  }
+
   ngOnInit(){
-   setInterval(()=>{
-    this.readings = this.firebaseService.getUpdatedReadings();
-     let len = this.readings.length;
-     let prev_temp = this.temperature;
-     let prev_humidity = this.humidity;
-     let prev_hear_rate = this.heart_rate;
+  //  setInterval(()=>{
+  //   this.readings = this.firebaseService.getUpdatedReadings();
+  //    let len = this.readings.length;
+  //    let prev_temp = this.temperature;
+  //    let prev_humidity = this.humidity;
+  //    let prev_hear_rate = this.heart_rate;
 
-     this.temperature = parseInt(this.readings[len-1].temperature);
-     this.humidity = parseInt(this.readings[len-1].humidity);
-     this.heart_rate = parseInt(this.readings[len-1].heartbeat);
+  //    this.temperature = parseInt(this.readings[len-1].temperature);
+  //    this.humidity = parseInt(this.readings[len-1].humidity);
+  //    this.heart_rate = parseInt(this.readings[len-1].heartbeat);
 
-     let temperature_percent = (Math.abs(this.temperature - prev_temp)) / (prev_temp/100);
+  //    let temperature_percent = (Math.abs(this.temperature - prev_temp)) / (prev_temp/100);
      
-   },4000)
+  //  },4000)
+      // this.read();
+      setInterval(()=>{
+        this.ThresholdData = this.firebaseService.getThresholdData();
+        console.log(this.ThresholdData);
+      },2000);
+      
 
   }
 
-  sendAlert(){
-    let len = this.readings.length;
-    const latest_reading = this.readings[len-1];
-    let latest_gas_readings = {
-           'CO': latest_reading.co,
-           'H2S': latest_reading.h2s,
-           'NH3': latest_reading.nh3,
-           'CH4': latest_reading.ch4,
-           'Temperature' : latest_reading.temperature,
-           'Humidity' : latest_reading.humidity
-    }
-    const gas_readings = JSON.stringify(latest_gas_readings,null,2);
-    const emergencyMessage = `
-    URGENT: Workplace Emergency Alert
-
-    This is an emergency alert regarding a sewage worker's exposure to toxic gases. Immediate action is required.
-    
-    Location: [${latest_reading.lat} , ${latest_reading.lon}]
-    Worker's Name: XYZ (id: ${latest_reading.emp_id})
-    Current Environmental status: ${gas_readings}
-    
-    Please take the following steps immediately:
-    
-    1. Ensure the worker is moved to a safe area with fresh air.
-    2. Call emergency services to report the incident.
-    3. Contact the nearest medical facility for assistance.
-    4. Evacuate the area if necessary to protect other workers. 
-    `
-    // this.messageService.sendSMS(emergencyMessage)
+  async read(){
+    this.readings = await this.firebaseService.readData();
+    console.log(this.readings);
   }
+
+  // sendAlert(){
+  //   let len = this.readings.length;
+  //   const latest_reading = this.readings[len-1];
+  //   let latest_gas_readings = {
+  //          'CO': latest_reading.co,
+  //          'H2S': latest_reading.h2s,
+  //          'NH3': latest_reading.nh3,
+  //          'CH4': latest_reading.ch4,
+  //          'Temperature' : latest_reading.temperature,
+  //          'Humidity' : latest_reading.humidity
+  //   }
+  //   const gas_readings = JSON.stringify(latest_gas_readings,null,2);
+  //   const emergencyMessage = `
+  //   URGENT: Workplace Emergency Alert
+
+  //   This is an emergency alert regarding a sewage worker's exposure to toxic gases. Immediate action is required.
+    
+  //   Location: [${latest_reading.lat} , ${latest_reading.lon}]
+  //   Worker's Name: XYZ (id: ${latest_reading.emp_id})
+  //   Current Environmental status: ${gas_readings}
+    
+  //   Please take the following steps immediately:
+    
+  //   1. Ensure the worker is moved to a safe area with fresh air.
+  //   2. Call emergency services to report the incident.
+  //   3. Contact the nearest medical facility for assistance.
+  //   4. Evacuate the area if necessary to protect other workers. 
+  //   `
+  //   // this.messageService.sendSMS(emergencyMessage)
+  // }
 
   logout(){
     this.firebaseService.logout();

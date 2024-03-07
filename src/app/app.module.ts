@@ -41,6 +41,7 @@ import { LiveTableComponent } from './live-table/live-table.component';
 import { PiechartOverheadComponent } from './piechart-overhead/piechart-overhead.component';
 import { BorewellStatusComponent } from './borewell-status/borewell-status.component';
 import { SumpTankStatusComponent } from './sump-tank-status/sump-tank-status.component';
+import { SetThresholdComponent } from './set-threshold/set-threshold.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { SumpTankStatusComponent } from './sump-tank-status/sump-tank-status.com
     LiveTableComponent,
     PiechartOverheadComponent,
     BorewellStatusComponent,
-    SumpTankStatusComponent
+    SumpTankStatusComponent,
+    SetThresholdComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/compat/auth'
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { MessageService } from './message.service';
+import { ReportService } from './report.service';
 
 import { getDatabase, ref, set } from 'firebase/database';
 import { Router } from '@angular/router';
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 export class FirebaseService {
   
   loggedIn = false;
-  constructor(public firebaseAuth : AngularFireAuth,private router:Router,private db:AngularFireDatabase,private messageService:MessageService) { }
+  constructor(public firebaseAuth : AngularFireAuth,private router:Router,private db:AngularFireDatabase,private messageService:MessageService,
+   private reportService:ReportService) { }
 
   async signIn(email: string, password: string){
 
@@ -45,9 +47,11 @@ export class FirebaseService {
   private async fetchData(){
   
     const ref = this.db.list('/watermanagement');
-    console.log(ref.valueChanges());
+    // console.log(ref.valueChanges());
     return ref.valueChanges();
   }
+
+
 
    readings:any[] = []
    latest_id = -1;
@@ -55,8 +59,11 @@ export class FirebaseService {
   async readData(){
     await new Promise(async(resolve,reject)=>{
       (await this.fetchData()).subscribe((data)=>{
+        // this.reportService.storeMysql(data.slice(-20));
+        console.log(data.slice(-20));
         let clean_data: any[] = []
         data.forEach((reading:any)=>{
+          // console.log(reading);
           const data = reading.data.split('#');
          
           const structured_json = {
@@ -78,8 +85,9 @@ export class FirebaseService {
           clean_data.push(structured_json);
         })
         this.readings = clean_data
-        
+        // console.log("inside read data method");
         // console.log(this.readings);
+       
         resolve(data);
       });
     });
@@ -88,9 +96,37 @@ export class FirebaseService {
 
 
 
-  getUpdatedReadings(){
+   getUpdatedReadings(){
+     
     return this.readings;
   }
+
+  ThresholdData = {
+    OverHeadMin:'',
+    OverHeadMax:'',
+    SumpTankMin:'',
+    SumpTankMax:''
+  }
+
+
+  updateThreshold(ThresholdData:any){
+
+    // console.log(ThresholdData)
+    this.ThresholdData.OverHeadMax = ThresholdData.OverHeadMax;
+    this.ThresholdData.OverHeadMin = ThresholdData.OverHeadMin;
+    this.ThresholdData.SumpTankMin = ThresholdData.SumpTankMin;
+    this.ThresholdData.SumpTankMax = ThresholdData.SumpTankMax;
+    const ref = this.db.list('/transmit');
+    ref.push(ThresholdData);
+    console.log("Pushed");
+    
+  }
+
+  getThresholdData(){
+    return this.ThresholdData;
+  }
+
+  
 
 
   logout(){

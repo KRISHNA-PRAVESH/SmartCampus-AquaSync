@@ -1,0 +1,22 @@
+
+<h4>Set Threshold</h4>
+
+<div class="form">
+    <form action="" (ngSubmit)="Update()">
+    
+        Over Head Min: <input type="text" name="OverHeadMin" [(ngModel)]="ThresholdData.OverHeadMin">
+        <br>
+        <br>
+        Over Head Max: <input type="text" name="OverHeadMax" [(ngModel)]="ThresholdData.OverHeadMax">
+        <br>
+        <br>
+        <br>
+        Sump Tank Min: <input type="text" name="SumpTankMin" [(ngModel)]="ThresholdData.SumpTankMin">
+        <br>
+        <br>
+        Sump Tank Max: <input type="text" name="SumpTankMax" [(ngModel)]="ThresholdData.SumpTankMax">
+        <br>
+        <br>
+        <button mat-raised-button color="primary">set</button>
+    </form>
+</div>

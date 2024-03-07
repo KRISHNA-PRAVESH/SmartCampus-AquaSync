@@ -20,6 +20,7 @@ export class PiechartComponent implements OnInit {
   //use setTime out for some time until graph component fetches all data
    
       this.readings =  await this.firebaseService.readData();
+      // console.log("Insde pichart component");
       // console.log(this.readings);
       this.fetchable = true;
       let len = this.readings.length-1;
@@ -30,7 +31,7 @@ export class PiechartComponent implements OnInit {
 
   
    setInterval(()=>{
-    this.readings = this.firebaseService.getUpdatedReadings();
+    this.readings =  this.firebaseService.getUpdatedReadings();
     let len = this.readings.length-1;
     let current_water_level = parseInt(this.readings[len].sump_water_level);
     this.water_level = this.readings[len].sump_water_level;

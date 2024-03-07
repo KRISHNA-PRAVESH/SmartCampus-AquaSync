@@ -13,6 +13,8 @@ export class BorewellStatusComponent {
 
     setInterval(()=>{
       this.readings = this.firebaseService.getUpdatedReadings();
+      // console.log("insdie borewell compo");
+      // console.log(this.readings);
       let len = this.readings.length;
       //slicing the latest 10 readings
       this.readings = this.readings[len-1];

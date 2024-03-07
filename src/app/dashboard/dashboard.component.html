@@ -134,22 +134,42 @@
           </div>
 
           <!-- Overhead tank -->
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="card center">
               <app-piechart-overhead></app-piechart-overhead>
-              
+           
+            </div>
+            Min: {{ThresholdData.OverHeadMin}}
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+            &nbsp; &nbsp; &nbsp; 
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+            &nbsp; 
+            Max : {{ThresholdData.OverHeadMax}}
+          </div>
+
+          <div class="col-md-4">
+            <div class="card center">
+              <app-set-threshold></app-set-threshold>
             </div>
           </div>
 
 
           <!-- Sump tank -->
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="card center">
               <app-piechart></app-piechart>
               <div class="tank-title">
                
               </div>
             </div>
+            Min: {{ThresholdData.SumpTankMin}}
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+            &nbsp; &nbsp; &nbsp; 
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+            &nbsp; 
+            Max : {{ThresholdData.SumpTankMax}}
           </div>
 
           
